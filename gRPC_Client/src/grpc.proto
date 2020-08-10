@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package main;
+
+
+//////////////////////////////////////////////////// message ///////////////////////////////////////////////////////////
+
+message AddUser_Request{
+  string userName = 1;
+  string password = 2;
+}
+message AddUser_Response{
+  int32  code = 1;
+}
+
+message DelUser_Request{
+  string userName = 1;
+}
+message DelUser_Response{
+  int32  code = 1;
+}
+
+message AddGroup_Request{
+  string groupName = 1;
+}
+message AddGroup_Response{
+  int32  code = 1;
+}
+
+message DelGroup_Request{
+  string groupName = 1;
+}
+message DelGroup_Response{
+  int32  code = 1;
+}
+
+message AddUserToGroup_Request{
+  string  group = 1;
+  string  user = 2;
+}
+message AddUserToGroup_Response{
+  int32  code = 1;
+}
+
+message DelUserToGroup_Request{
+  string  group = 1;
+  string  user = 2;
+}
+message DelUserToGroup_Response{
+  int32  code = 1;
+}
+
+message GetGroupList_Request{
+
+}
+message GetGroupList_Response{
+  string GroupList = 1;
+}
+
+message GetGroupUsers_Request{
+  string group = 1;
+}
+message GetGroupUsers_Response{
+  string UserList = 1;
+
+}
+
+message GetUserGroups_Request{
+  string user = 1;
+}
+message GetUserGroups_Response{
+  string uGroupList = 1;
+}
+
+message SetUserActive_Request{
+  string user = 1;
+  int32 bActive = 2;
+
+}
+message SetUserActive_Response{
+  int32  code = 1;
+}
+
+message SetUserPassword_Request{
+  string user = 1;
+  string oldPassword = 2;
+  string newPassword = 3;
+
+}
+message SetUserPassword_Response{
+  int32 code = 1;
+}
+
+message SetUserPasswordAdmin_Request{
+  string UserName = 1;
+  string UserPassword = 2;
+
+}
+message SetUserPasswordAdmin_Response{
+  int32 code = 1;
+}
+
+message ReturnErrInfo_Request{
+  int32  code = 1;
+}
+message ReturnErrInfo_Response{
+  int32 rCode = 1;
+  string errorText = 2;
+
+}
+
+message AddUserPlus_Request{
+
+  string userName = 1;
+  string password = 2;
+  string groupName1 =3;
+  string groupName2 =4;
+}
+message AddUserPlus_Response{
+
+  int32 rCode = 1;
+
+}
+
+
+//////////////////////////////////////////////// service  /////////////////////////////////////////////////////////////
+
+service IUserRPCService {
+
+  rpc AddUser(AddUser_Request) returns(AddUser_Response);
+  rpc DelUser(DelUser_Request) returns(DelUser_Response);
+  rpc AddGroup(AddGroup_Request) returns(AddGroup_Response);
+  rpc DelGroup(DelGroup_Request) returns(DelGroup_Response);
+  rpc AddUserToGroup(AddUserToGroup_Request) returns(AddUserToGroup_Response);
+  rpc DelUserToGroup(DelUserToGroup_Request) returns(DelUserToGroup_Response);
+  rpc GetGroupList(GetGroupList_Request) returns(GetGroupList_Response);
+  rpc GetGroupUsers(GetGroupUsers_Request) returns(GetGroupUsers_Response);
+  rpc GetUserGroups(GetUserGroups_Request) returns(GetUserGroups_Response);
+  rpc SetUserActive(SetUserActive_Request) returns(SetUserActive_Response);
+  rpc SetUserPassword(SetUserPassword_Request) returns(SetUserPassword_Response);
+  rpc SetUserPasswordAdmin(SetUserPasswordAdmin_Request) returns(SetUserPasswordAdmin_Response);
+  rpc ReturnErrInfo(ReturnErrInfo_Request) returns(ReturnErrInfo_Response);
+
+  rpc AddUserPlus(AddUserPlus_Request) returns(AddUserPlus_Response);
+
+}
+
+/**
+* create .go
+*/
+//protoc --go_out=plugins=grpc:. grpc.proto
